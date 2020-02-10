@@ -5,18 +5,40 @@
  */
 package Controller;
 
-/**
- *
- * @author StickyPicky
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+
 public class loginadmin extends javax.swing.JFrame {
+    Connection conn =null;
+    Statement st = null;
 
     /**
      * Creates new form loginadmin
      */
     public loginadmin() {
         initComponents();
+        try {
+Class.forName("com.mysql.jdbc.Driver");
+conn=DriverManager.getConnection("jdbc:mysql://localhost/dbprimamotorsidomulyo","root","");st=conn.createStatement();
+//JOptionPane.showMessageDialog(null, "Berhasil Koneksi");
+}
+catch(  ClassNotFoundException | SQLException ex){
+//JOptionPane.showMessageDialog(null,"Gagal terkoneksi Karena " + ex);
+}
+        
     }
+    
+    private void HapusLayar(){
+user.setText("");
+password.setText("");
+user.setEnabled(true);
+password.setEnabled(true);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +53,9 @@ public class loginadmin extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         login = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,12 +89,31 @@ public class loginadmin extends javax.swing.JFrame {
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 324, 311, 45));
 
         login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMouseClicked(evt);
+            }
+        });
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 401, 165, 40));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Login Admin.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        setSize(new java.awt.Dimension(1016, 539));
+        jMenu1.setText("Menu");
+
+        jMenuItem1.setText("Kembali");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
+        setSize(new java.awt.Dimension(1016, 559));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -80,6 +124,39 @@ public class loginadmin extends javax.swing.JFrame {
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+new loginkaryawan().setVisible(true);  
+dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
+try{
+if(user.getText().equals("") ||
+ password.getText().equals("")){
+JOptionPane.showMessageDialog(rootPane, "Data Tidak Boleh Kosong", "Pesan", JOptionPane.ERROR_MESSAGE);
+user.requestFocus();
+HapusLayar();
+}else{
+st = conn.createStatement();
+    String sql = ("SELECT * FROM tbakun WHERE user ='"+user.getText()+"' AND password ='"+String.valueOf(password.getPassword())+"'");
+ResultSet rs = st.executeQuery(sql);
+if(rs.next()){
+this.dispose();
+new daftarbarang().setVisible(true);
+}else{
+JOptionPane.showMessageDialog(rootPane, "Anda Bukan Admin", "Pesan",
+JOptionPane.ERROR_MESSAGE);
+HapusLayar();
+}
+}
+}catch(Exception e){
+e.printStackTrace();
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,6 +195,9 @@ public class loginadmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel login;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField user;

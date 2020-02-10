@@ -5,18 +5,41 @@
  */
 package Controller;
 
-/**
- *
- * @author StickyPicky
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+
 public class loginkaryawan extends javax.swing.JFrame {
+    Connection conn =null;
+    Statement st = null;
 
     /**
      * Creates new form loginkaryawan
      */
+    
+    
     public loginkaryawan() {
         initComponents();
+        try {
+Class.forName("com.mysql.jdbc.Driver");
+conn=DriverManager.getConnection("jdbc:mysql://localhost/dbprimamotorsidomulyo","root","");st=conn.createStatement();
+//JOptionPane.showMessageDialog(null, "Berhasil Koneksi");
+}
+catch(  ClassNotFoundException | SQLException ex){
+//JOptionPane.showMessageDialog(null,"Gagal terkoneksi Karena " + ex);
+}
     }
+    
+    private void HapusLayar(){
+user.setText("");
+password.setText("");
+user.setEnabled(true);
+password.setEnabled(true);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,10 +50,22 @@ public class loginkaryawan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         user = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         login = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,7 +109,22 @@ public class loginkaryawan extends javax.swing.JFrame {
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Login Karyawan.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        setSize(new java.awt.Dimension(1016, 539));
+        jMenu3.setText("Admin");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Login");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar2.add(jMenu3);
+
+        setJMenuBar(jMenuBar2);
+
+        setSize(new java.awt.Dimension(1016, 560));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -87,9 +137,35 @@ public class loginkaryawan extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-new daftarbarang().setVisible(true);  
-dispose();        // TODO add your handling code here:
+try{
+if(user.getText().equals("") ||
+ password.getText().equals("")){
+JOptionPane.showMessageDialog(rootPane, "Data Tidak Boleh Kosong", "Pesan", JOptionPane.ERROR_MESSAGE);
+user.requestFocus();
+HapusLayar();
+}else{
+st = conn.createStatement();
+    String sql = ("SELECT * FROM tbakun WHERE user ='"+user.getText()+"' AND password ='"+String.valueOf(password.getPassword())+"'");
+ResultSet rs = st.executeQuery(sql);
+if(rs.next()){
+this.dispose();
+new daftarbarang().setVisible(true);
+}else{
+JOptionPane.showMessageDialog(rootPane, "Username dan Password Salah Atau Akun Belum Terdaftar", "Pesan",
+JOptionPane.ERROR_MESSAGE);
+HapusLayar();
+}
+}
+}catch(Exception e){
+e.printStackTrace();
+}        // TODO add your handling code here:
     }//GEN-LAST:event_loginMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+new loginadmin().setVisible(true);  
+dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +204,12 @@ dispose();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel login;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField user;

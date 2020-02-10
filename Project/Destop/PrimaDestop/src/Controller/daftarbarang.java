@@ -11,10 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author StickyPicky
- */
+
 public class daftarbarang extends javax.swing.JFrame {
 public Connection con;
     public Statement st;
@@ -177,7 +174,7 @@ dispose();// TODO add your handling code here:
     }//GEN-LAST:event_homeMouseClicked
 
     private void transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiMouseClicked
-//new transaksi().setVisible(true);  
+new Transaksi().setVisible(true);  
 dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_transaksiMouseClicked
 

@@ -12,10 +12,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author StickyPicky
- */
+
 public class databarang extends javax.swing.JFrame {
     public Connection con;
     public Statement st;
@@ -78,7 +75,7 @@ public class databarang extends javax.swing.JFrame {
             st.execute("INSERT INTO tbstock VALUES ('"+kodebarang+"','"+namabarang+"','"+jenisbarang+"','"+hargajual+"','"+hargamodal+"','"+stockbarang+"','"+keterangan+"')");
             JOptionPane.showMessageDialog(null,"Data Berhail DiTambahkan","Alert",JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Data Gagak DiTambahkan","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Data Gagal DiTambahkan","Error",JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
         }
             
@@ -380,7 +377,7 @@ public class databarang extends javax.swing.JFrame {
     }//GEN-LAST:event_homeMouseClicked
 
     private void transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiMouseClicked
-        //new transaksi().setVisible(true);
+        new Transaksi().setVisible(true);
         dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_transaksiMouseClicked
 

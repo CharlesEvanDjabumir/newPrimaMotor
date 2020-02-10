@@ -7,26 +7,24 @@ package Controller;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
-/**
- *
- * @author USER
- */
+
 public class koneksi {
-    private Connection koneksi;
-    public Connection getKoneksi(){
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            
-        }
-        try {
-            koneksi = DriverManager.getConnection("jdbc:mysql://localhost/dbprimamotorsidomulyo","root","");
-            if (koneksi != null) {
-                System.out.println("Koneksi Berhasil");
-            }
-        } catch (SQLException ex) {
-            System.out.println("Koneksi Gagal");
-        }
+    public  static Connection koneksi;
+    public static Connection getKoneksi(){
+        if(koneksi==null){  
+      try {  
+        String url=new String();  
+        String user=new String();  
+        String password=new String();  
+        url="jdbc:mysql://localhost/dbprimamotorsidomulyo";  
+        user="root";  
+        password="";  
+          DriverManager.registerDriver(new com.mysql.jdbc.Driver());  
+        koneksi=DriverManager.getConnection(url,user,password);  
+      }catch (SQLException t){  
+        System.out.println("Eror membuat koneksi");  
+      }  
+     }
         return koneksi;
     }
 }
