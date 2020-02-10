@@ -28,7 +28,6 @@ public class Transaksi extends javax.swing.JFrame {
      */
     public Transaksi() {
         initComponents();
-        
         txtnamabarang.requestFocus();
         txtnofaktur.disable();
         auto_key();
@@ -407,6 +406,9 @@ public class Transaksi extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         txtnofaktur = new javax.swing.JTextField();
         txttotalharga = new javax.swing.JTextField();
         jDateJual = new com.toedter.calendar.JDateChooser();
@@ -428,10 +430,13 @@ public class Transaksi extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TblDetail = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         home = new javax.swing.JLabel();
         transaksi = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -446,6 +451,12 @@ public class Transaksi extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -456,9 +467,11 @@ public class Transaksi extends javax.swing.JFrame {
 
         txttotalharga.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         txttotalharga.setBorder(null);
+        txttotalharga.setOpaque(false);
+        txttotalharga.setRequestFocusEnabled(false);
         getContentPane().add(txttotalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 670, 57));
 
-        jDateJual.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jDateJual.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         getContentPane().add(jDateJual, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 275, 310, 55));
 
         txtkodebarang.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -579,16 +592,13 @@ public class Transaksi extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 1510, 250));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/transaksi.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 homeMouseClicked(evt);
             }
         });
-        getContentPane().add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 23, 165, 54));
+        getContentPane().add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(523, 23, 160, 54));
 
         transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -596,7 +606,7 @@ public class Transaksi extends javax.swing.JFrame {
                 transaksiMouseClicked(evt);
             }
         });
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 23, 165, 54));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 23, 160, 54));
 
         logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logout.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -604,9 +614,26 @@ public class Transaksi extends javax.swing.JFrame {
                 logoutMouseClicked(evt);
             }
         });
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(918, 23, 165, 54));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 23, 160, 54));
 
-        setSize(new java.awt.Dimension(1620, 942));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/transaksi.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jMenu3.setText("File");
+
+        jMenuItem1.setText("Laporan");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar2.add(jMenu3);
+
+        setJMenuBar(jMenuBar2);
+
+        setSize(new java.awt.Dimension(1620, 958));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -706,6 +733,12 @@ public class Transaksi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsubtotalActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+new laporan().setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -751,6 +784,12 @@ public class Transaksi extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateJual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

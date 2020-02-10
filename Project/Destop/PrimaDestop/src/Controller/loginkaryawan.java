@@ -149,7 +149,7 @@ st = conn.createStatement();
 ResultSet rs = st.executeQuery(sql);
 if(rs.next()){
 this.dispose();
-new daftarbarang().setVisible(true);
+new Transaksi().setVisible(true);
 }else{
 JOptionPane.showMessageDialog(rootPane, "Username dan Password Salah Atau Akun Belum Terdaftar", "Pesan",
 JOptionPane.ERROR_MESSAGE);
