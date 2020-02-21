@@ -5,6 +5,7 @@
  */
 package Controller;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +15,18 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.view.JRDesignViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class Transaksi extends javax.swing.JFrame {
@@ -427,7 +438,7 @@ public class Transaksi extends javax.swing.JFrame {
         btndelete = new javax.swing.JLabel();
         btnadd = new javax.swing.JLabel();
         btnsimpan = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        btnprint = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TblDetail = new javax.swing.JTable();
         home = new javax.swing.JLabel();
@@ -564,13 +575,13 @@ public class Transaksi extends javax.swing.JFrame {
         });
         getContentPane().add(btnsimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 753, 210, 45));
 
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnprint.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnprint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                btnprintMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 753, 210, 45));
+        getContentPane().add(btnprint, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 753, 210, 45));
 
         TblDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -709,10 +720,22 @@ public class Transaksi extends javax.swing.JFrame {
         }
     }
     
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-
+    private void btnprintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnprintMouseClicked
+try {
+            String NamaFile = "src/nota/nota.jasper";
+            HashMap param = new HashMap();
+            
+            param.put("nofaktur", (txtprintnofaktur.getText()));
+            
+            JasperPrint JPrint = JasperFillManager.fillReport(NamaFile, param, sambung());
+            JasperViewer.viewReport(JPrint, false);
+            
+            
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_btnprintMouseClicked
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
         new daftarbarang().setVisible(true);
@@ -725,7 +748,7 @@ public class Transaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_transaksiMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        new loginkaryawan().setVisible(true);
+        new loginadmin().setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_logoutMouseClicked
 
@@ -779,11 +802,11 @@ new laporan().setVisible(true);
     private javax.swing.JTable TblDetail;
     private javax.swing.JLabel btnadd;
     private javax.swing.JLabel btndelete;
+    private javax.swing.JLabel btnprint;
     private javax.swing.JLabel btnsimpan;
     private javax.swing.JLabel home;
     private com.toedter.calendar.JDateChooser jDateJual;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

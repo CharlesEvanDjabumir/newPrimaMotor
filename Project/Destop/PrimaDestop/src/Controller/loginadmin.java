@@ -99,9 +99,9 @@ password.setEnabled(true);
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Login Admin.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jMenu1.setText("Menu");
+        jMenu1.setText("Karyawan");
 
-        jMenuItem1.setText("Kembali");
+        jMenuItem1.setText("login");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);

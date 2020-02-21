@@ -179,7 +179,7 @@ dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_transaksiMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-new loginkaryawan().setVisible(true);  
+new loginadmin().setVisible(true);  
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_logoutMouseClicked
 
